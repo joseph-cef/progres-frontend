@@ -3,40 +3,63 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards, getGroups } from '../services/api';
 
-/**
- * Shows the pedagogical groups and sections for each of the student's
- * enrolments.  Groups are fetched for every card the student has.  Each
- * group entry displays the group name, section name (if available) and
- * the long label of the academic period it belongs to.
- */
+
 export default function GroupsPage() {
   const { user } = useAuth();
+
   const {
     data,
     error,
     isLoading,
   } = useQuery(
-    ['groups', user?.uuid],
+    ['groups-latest', user?.uuid],
     async () => {
       const cards = await getStudentCards(user.uuid, user.token);
-      const groupsPerCard = await Promise.all(
-        cards.map((card) => getGroups(card.id, user.token))
-      );
-      return groupsPerCard.flat();
+
+      if (!Array.isArray(cards) || cards.length === 0) {
+        return { groups: [], card: null };
+      }
+
+      // اختيار آخر بطاقة (أحدث واحدة)
+      const latestCard = [...cards].sort((a, b) => b.id - a.id)[0];
+
+      const groups = await getGroups(latestCard.id, user.token);
+
+      return {
+        groups: Array.isArray(groups) ? groups : [],
+        card: latestCard,
+      };
     },
     { enabled: !!user }
   );
 
+  const groups = data?.groups || [];
+  const card = data?.card || null;
+
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold">Groups</h2>
-      {isLoading && <p>Loading groups…</p>}
-      {error && (
-        <p className="text-red-600">Failed to load groups: {error.message}</p>
+      <h2 className="text-xl font-bold">Groups (Latest Enrolment)</h2>
+
+      {card && (
+        <p className="text-sm text-gray-600 dark:text-gray-300">
+          Academic Year:{' '}
+          <span className="font-medium">
+            {card.anneeAcademiqueCode || card.academicYearString}
+          </span>
+        </p>
       )}
-      {Array.isArray(data) && data.length > 0 ? (
+
+      {isLoading && <p>Loading groups…</p>}
+
+      {error && (
+        <p className="text-red-600">
+          Failed to load groups: {error.message}
+        </p>
+      )}
+
+      {groups.length > 0 ? (
         <ul className="space-y-2">
-          {data.map((g) => (
+          {groups.map((g) => (
             <li
               key={g.id}
               className="p-3 bg-white dark:bg-gray-800 rounded shadow flex justify-between items-center"

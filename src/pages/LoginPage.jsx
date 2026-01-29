@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-/**
- * Login form for the Progres frontend.  Users supply their matricule (or
- * username) and password, which are sent to the backend via the API
- * wrapper.  On successful authentication the global auth context is
- * updated and the user is redirected back to the page they attempted to
- * visit before being prompted to log in.
- */
+
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();

@@ -3,12 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getAccommodation } from '../services/api';
 
-/**
- * Lists the accommodation requests and statuses for the student.  Each
- * entry contains the residence name, dormitory (Dou) and any
- * assignment label returned by the backend.  Many institutions use
- * this information to indicate dormitory allocation results.
- */
+
 export default function AccommodationPage() {
   const { user } = useAuth();
   const {

@@ -3,13 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getIndividualInfo, getStudentPhoto, getEstablishmentLogo, getStudentCards } from '../services/api';
 
-/**
- * Displays detailed information about the student including their name,
- * date and place of birth along with their portrait and the
- * establishment's logo.  The logo is fetched only once using the
- * establishment ID provided in the authentication payload.  The
- * student's photo is always loaded based on their UUID.
- */
+
 export default function ProfilePage() {
   const { user } = useAuth();
   // Individual info
@@ -51,13 +45,13 @@ export default function ProfilePage() {
       {info && (
         <div className="p-4 bg-white dark:bg-gray-800 rounded shadow space-y-3">
           <div className="flex items-center space-x-4">
-            {photoData && (
+            {/* {photoData && (
               <img
                 src={`data:image/jpeg;base64,${photoData}`}
                 alt="Student photo"
                 className="w-20 h-20 rounded-full object-cover"
               />
-            )}
+            )} */}
             <div>
               <h3 className="text-lg font-semibold">
                 {info.prenomLatin} {info.nomLatin}

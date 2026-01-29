@@ -3,11 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards, getExamGrades } from '../services/api';
 
-/**
- * Shows the exam grades for the student's latest enrolment.  A row
- * includes the subject name, exam note, coefficient and the session
- * title.  If no note is present a dash is displayed instead.
- */
 export default function ExamGradesPage() {
   const { user } = useAuth();
   const {
@@ -25,40 +20,98 @@ export default function ExamGradesPage() {
     { enabled: !!user }
   );
 
+  const hasData = Array.isArray(data) && data.length > 0;
+
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold">Exam Grades</h2>
-      {isLoading && <p>Loading exam grades…</p>}
-      {error && <p className="text-red-600">Failed to load grades: {error.message}</p>}
-      {Array.isArray(data) && data.length > 0 ? (
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
-            <thead className="bg-gray-50 dark:bg-gray-700">
-              <tr>
-                <th className="px-4 py-2 text-left text-sm font-semibold">Subject</th>
-                <th className="px-4 py-2 text-left text-sm font-semibold">Note</th>
-                <th className="px-4 py-2 text-left text-sm font-semibold">Coefficient</th>
-                <th className="px-4 py-2 text-left text-sm font-semibold">Session</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-              {data.map((item, idx) => (
-                <tr
-                  key={idx}
-                  className="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700"
-                >
-                  <td className="px-4 py-2 whitespace-nowrap">{item.mcLibelleFr}</td>
-                  <td className="px-4 py-2 whitespace-nowrap">{item.noteExamen ?? '–'}</td>
-                  <td className="px-4 py-2 whitespace-nowrap">{item.rattachementMcCoefficient}</td>
-                  <td className="px-4 py-2 whitespace-nowrap">{item.planningSessionIntitule}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {/* عنوان الصفحة مع ستايل أجمل */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">
+            Exam Grades
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Latest exam results fetched from your student card
+          </p>
         </div>
-      ) : (
-        !isLoading && <p>No exam grades found.</p>
-      )}
+        {hasData && (
+          <span className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
+            {data.length} subjects
+          </span>
+        )}
+      </div>
+
+      {/* كارد رئيسي لعرض الجدول */}
+      <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900 sm:p-6">
+        {isLoading && (
+          <div className="space-y-2">
+            <div className="h-4 w-32 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+            <div className="h-8 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+            <div className="h-8 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+          </div>
+        )}
+
+        {error && (
+          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-900/30 dark:text-red-300">
+            Failed to load grades: {error.message}
+          </div>
+        )}
+
+        {!isLoading && !error && !hasData && (
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            No exam grades found.
+          </p>
+        )}
+
+        {hasData && (
+          <div className="mt-2 overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700">
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-800/80">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      Subject
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      Note
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      Coefficient
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100 bg-white dark:divide-gray-800 dark:bg-gray-900">
+                  {data.map((item, idx) => (
+                    <tr
+                      key={idx}
+                      className="transition-colors hover:bg-emerald-50/60 dark:hover:bg-emerald-900/10"
+                    >
+                      {/* Subject */}
+                      <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-100">
+                        {item.mcLibelleFr}
+                      </td>
+
+                      {/* Note — كلها خضراء */}
+                      <td className="px-4 py-3">
+                        <span className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300">
+                          {item.noteExamen ?? '–'}
+                        </span>
+                      </td>
+
+                      {/* Coefficient */}
+                      <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                        <span className="inline-flex items-center rounded-full bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-200">
+                          {item.rattachementMcCoefficient}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
