@@ -2,14 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getDischarge } from '../services/api';
-
-/**
- * Displays the student's discharge statuses from various university
- * departments such as the central library, faculty, scholarship service,
- * department and residence.  A discharged state is represented by a
- * truthy value in the DTO; the page converts this into a human
- * friendly yes/no indicator.
- */
+ 
 export default function DischargePage() {
   const { user } = useAuth();
   const {

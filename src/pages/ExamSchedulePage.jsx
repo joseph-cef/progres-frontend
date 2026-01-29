@@ -8,12 +8,7 @@ import {
   getExamSchedule,
 } from '../services/api';
 
-/**
- * Displays the schedule of upcoming exams for all periods in the current
- * academic year.  For each period associated with the student's level
- * the backend returns a list of exam sessions.  The list is flattened
- * and sorted by date.
- */
+ 
 export default function ExamSchedulePage() {
   const { user } = useAuth();
   const { data, error, isLoading } = useQuery(
