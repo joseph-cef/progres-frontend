@@ -1,39 +1,8 @@
-# Netlify configuration for the Progres front‑end
-#
-# This file defines the build settings, environment variables and
-# redirect rules required to run the React single page application on
-# Netlify.  Two redirect rules are defined: one to proxy API requests
-# to the official Progres backend, and a catch‑all rule to enable
-# client‑side routing.  Netlify processes redirects in the order
-# specified, so the API proxy must appear before the SPA fallback.
-
 [build]
-  # Build the Vite project
   command = "npm run build"
-  # The directory containing the built site (Vite outputs to `dist`)
   publish = "dist"
 
-[context.production.environment]
-  # Ensure the app makes requests to our API proxy rather than
-  # hardcoding the backend URL.  In development this variable
-  # defaults to "/api" via the `.env` file; specifying it here
-  # guarantees the same value during the production build.
-  VITE_API_BASE_URL = "/api"
-
 [[redirects]]
-  # Proxy all requests beginning with /api/ to the Progres backend.
-  # The :splat portion captures the remainder of the path after
-  # /api/ so that the proxied URL matches the backend's endpoints
-  # (which do not include the /api prefix).  For example,
-  # `/api/authentication/v1/` becomes `https://progres.mesrs.dz/authentication/v1/`.
-  from = "/api/*"
-  to = "https://progres.mesrs.dz/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  # Fallback rule to serve index.html for all non‑file requests.
-  # This enables client‑side routing for the React application.
   from = "/*"
   to = "/index.html"
   status = 200

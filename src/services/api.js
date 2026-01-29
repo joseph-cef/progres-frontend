@@ -1,19 +1,35 @@
 import axios from 'axios';
 
-// Base URL for the API.  In production this is set via
-// VITE_API_BASE_URL in the environment, falling back to '/api' so that
-// local development uses the Vite proxy defined in vite.config.js.
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+// =========================
+// API BASE URL CONFIG
+// =========================
+
+// ⚠️ غيّر هذا الرابط إذا كان الـ API عندك على دومين أو مسار مختلف.
+const DEFAULT_API_BASE_URL = 'https://progres.univ-dz.dz/api';
+
+// نأخذ من متغيّر البيئة إن وُجد، وإلا نستعمل القيمة الافتراضية.
+// نزيل أي / زيادة في نهاية الرابط لنتجنب // في المسارات.
+const API_BASE_URL = (
+  import.meta.env.VITE_API_BASE_URL ||
+  DEFAULT_API_BASE_URL
+).replace(/\/+$/, '');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
+// =========================
+// GLOBAL ERROR HANDLING
+// =========================
+
 // Normalize error responses to return a single message string.
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    const message = error?.response?.data?.message || error.message || 'Unknown error';
+    const message =
+      error?.response?.data?.message ||
+      error.message ||
+      'Unknown error';
     return Promise.reject(new Error(message));
   },
 );
@@ -22,7 +38,13 @@ function authHeader(token) {
   return token ? { Authorization: token } : {};
 }
 
+// =========================
+// API METHODS
+// =========================
+
 export async function login(username, password) {
+  // baseURL + /authentication/v1/
+  // مثال: https://progres.univ-dz.dz/api/authentication/v1/
   const { data } = await api.post('/authentication/v1/', { username, password });
   return data;
 }
@@ -147,6 +169,7 @@ export async function getAcademicPeriods(yearId, token) {
 }
 
 export async function getDischarge(uuid, token) {
+  // تأكد أن هذا المسار صحيح فى الـ API الحقيقى
   const { data } = await api.get(`/${uuid}/qitus`, {
     headers: authHeader(token),
   });
@@ -184,3 +207,6 @@ export async function getEstablishmentLogo(establishmentId, token) {
   );
   return data;
 }
+
+// مفيد لو حاب تطبع فى الـ console وتشوف فعليًا لأي رابط يتصل
+export { API_BASE_URL };
