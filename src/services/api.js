@@ -4,8 +4,7 @@ import axios from 'axios';
 // API BASE URL CONFIG
 // =========================
 
-// ⚠️ غيّر هذا الرابط إذا كان الـ API عندك على دومين أو مسار مختلف.
-const DEFAULT_API_BASE_URL = 'https://progres.univ-dz.dz/api';
+ const DEFAULT_API_BASE_URL = 'https://progres.mesrs.dz';
 
 // نأخذ من متغيّر البيئة إن وُجد، وإلا نستعمل القيمة الافتراضية.
 // نزيل أي / زيادة في نهاية الرابط لنتجنب // في المسارات.
