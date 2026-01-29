@@ -2,7 +2,12 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getDischarge } from '../services/api';
- 
+
+/**
+ * Displays the student's discharge state across various university
+ * services.  Each service indicates whether the student is cleared
+ * or not.  If no data is returned the page indicates this.
+ */
 export default function DischargePage() {
   const { user } = useAuth();
   const {

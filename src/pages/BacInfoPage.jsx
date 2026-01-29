@@ -3,7 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getBacInfo, getBacGrades, getStudentPhoto } from '../services/api';
 
- 
+/**
+ * Shows baccalaureate information along with subject grades and the
+ * student's photo.  Handles loading, error, and empty states.
+ */
 export default function BacInfoPage() {
   const { user } = useAuth();
   const {

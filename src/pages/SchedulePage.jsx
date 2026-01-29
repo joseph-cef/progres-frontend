@@ -64,12 +64,12 @@ export default function SchedulePage() {
                       ? `${s.plageHoraireHeureDebut} – ${s.plageHoraireHeureFin}`
                       : s.plageHoraireLibelleFr || '-'}
                   </td>
-                    <td className="px-4 py-2 whitespace-nowrap">{s.matiere}</td>
-                    <td className="px-4 py-2 whitespace-nowrap">{s.groupe}</td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      {s.prenomEnseignantLatin || ''} {s.nomEnseignantLatin || ''}
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">{s.refLieuDesignation || '-'}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.matiere}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.groupe}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">
+                    {s.prenomEnseignantLatin || ''} {s.nomEnseignantLatin || ''}
+                  </td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.refLieuDesignation || '-'}</td>
                 </tr>
               ))}
             </tbody>

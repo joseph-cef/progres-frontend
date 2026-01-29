@@ -3,6 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards, getCCGrades } from '../services/api';
 
+/**
+ * Shows the student's continuous control (CC) grades for the
+ * latest enrolment.  Each subject is listed with its CC note.
+ */
 export default function CCGradesPage() {
   const { user } = useAuth();
 

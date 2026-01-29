@@ -8,7 +8,12 @@ import {
   getExamSchedule,
 } from '../services/api';
 
- 
+/**
+ * Displays the exam schedule for the student's latest enrolment.  The
+ * schedule is compiled by iterating through each academic period in
+ * the current year and collecting the exam sessions for the
+ * student's level.  The resulting entries are sorted chronologically.
+ */
 export default function ExamSchedulePage() {
   const { user } = useAuth();
   const { data, error, isLoading } = useQuery(

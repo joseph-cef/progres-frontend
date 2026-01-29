@@ -3,6 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards } from '../services/api';
 
+/**
+ * Displays the student's latest enrollment card with a
+ * beautifully styled summary of registration details, and basic
+ * personal information.  Handles loading, error and empty states.
+ */
 export default function CardsPage() {
   const { user } = useAuth();
 
@@ -140,34 +145,12 @@ export default function CardsPage() {
               </div>
 
               <div className="grid grid-cols-2 gap-3 text-xs sm:grid-cols-3">
-                <InfoPill
-                  label="Academic Year"
-                  value={academicYear}
-                />
-                <InfoPill
-                  label="Level"
-                  value={level}
-                />
-                <InfoPill
-                  label="Cycle"
-                  value={cycle}
-                />
-                {field && (
-                  <InfoPill
-                    label="Field"
-                    value={field}
-                  />
-                )}
-                {specialty && (
-                  <InfoPill
-                    label="Specialty"
-                    value={specialty}
-                  />
-                )}
-                <InfoPill
-                  label="Card ID"
-                  value={latestCard.id}
-                />
+                <InfoPill label="Academic Year" value={academicYear} />
+                <InfoPill label="Level" value={level} />
+                <InfoPill label="Cycle" value={cycle} />
+                {field && <InfoPill label="Field" value={field} />} 
+                {specialty && <InfoPill label="Specialty" value={specialty} />} 
+                <InfoPill label="Card ID" value={latestCard.id} />
               </div>
             </div>
 
@@ -178,8 +161,7 @@ export default function CardsPage() {
                   Enrollment Snapshot
                 </p>
                 <p className="mt-1 text-sm text-slate-100">
-                  This card represents your latest registration in the university
-                  system.
+                  This card represents your latest registration in the university system.
                 </p>
               </div>
 
@@ -190,25 +172,19 @@ export default function CardsPage() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Level</span>
-                  <span className="font-medium line-clamp-1 text-right">
-                    {level}
-                  </span>
+                  <span className="font-medium line-clamp-1 text-right">{level}</span>
                 </div>
                 {field && (
                   <div className="flex items-center justify-between">
                     <span className="text-slate-400">Field</span>
-                    <span className="max-w-[9rem] text-right font-medium line-clamp-1">
-                      {field}
-                    </span>
+                    <span className="max-w-[9rem] text-right font-medium line-clamp-1">{field}</span>
                   </div>
                 )}
               </div>
 
               <div className="flex items-center justify-between text-[10px] text-slate-500">
                 <span>Generated from official records</span>
-                <span className="font-mono uppercase tracking-[0.16em]">
-                  ID • {String(latestCard.id).slice(-6)}
-                </span>
+                <span className="font-mono uppercase tracking-[0.16em]">ID • {String(latestCard.id).slice(-6)}</span>
               </div>
             </div>
           </div>

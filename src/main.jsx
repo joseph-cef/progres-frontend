@@ -6,9 +6,9 @@ import App from './App';
 import './index.css';
 import { AuthProvider } from './context/AuthContext';
 
-// Create a single query client instance for the application.  React Query
-// manages caching and server state for us, reducing the need for manual
-// data fetching and loading state management.
+// Create a single query client instance for the application.  React
+// Query manages caching and server state for us, reducing the need
+// for manual data fetching and loading state management.
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(

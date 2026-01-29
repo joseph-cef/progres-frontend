@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+/**
+ * Login form allowing a student to enter their username and
+ * password.  On submit it calls the login method provided by
+ * AuthContext which communicates with the backend.  Successful
+ * authentication stores the user in localStorage and navigates
+ * back to the page the user originally requested.
+ */
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();

@@ -4,6 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards } from '../services/api';
 
+/**
+ * Dashboard home page.  Shows a welcome greeting with the
+ * student's name if available, a highlight of their latest
+ * enrollment details, and quick links to commonly used pages.
+ */
 export default function HomePage() {
   const { user } = useAuth();
 
@@ -26,16 +31,16 @@ export default function HomePage() {
       {/* Header */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-<h2 className="text-2xl font-bold tracking-tight">
-  Welcome
-  {latestCard
-    ? `, ${latestCard.individuPrenomLatin || latestCard.individualFirstNameLatin} ${
-        latestCard.individuNomLatin || latestCard.individualLastNameLatin
-      }`
-    : user?.userName
-      ? `, ${user.userName}`
-      : ''}
-</h2>
+          <h2 className="text-2xl font-bold tracking-tight">
+            Welcome
+            {latestCard
+              ? `, ${latestCard.individuPrenomLatin || latestCard.individualFirstNameLatin} ${
+                  latestCard.individuNomLatin || latestCard.individualLastNameLatin
+                }`
+              : user?.userName
+              ? `, ${user.userName}`
+              : ''}
+          </h2>
 
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Overview of your latest academic information and quick shortcuts.
@@ -43,10 +48,7 @@ export default function HomePage() {
         </div>
         {latestCard && (
           <span className="inline-flex items-center rounded-full bg-blue-50 px-4 py-1.5 text-xs font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-200">
-            Academic year:{" "}
-            <span className="ml-1 font-semibold">
-              {latestCard.anneeAcademiqueCode || latestCard.academicYearString}
-            </span>
+            Academic year: <span className="ml-1 font-semibold">{latestCard.anneeAcademiqueCode || latestCard.academicYearString}</span>
           </span>
         )}
       </div>
@@ -90,7 +92,7 @@ export default function HomePage() {
                 Name
               </dt>
               <dd className="text-gray-900 dark:text-gray-100">
-                {latestCard.individuPrenomLatin || latestCard.individualFirstNameLatin}{" "}
+                {latestCard.individuPrenomLatin || latestCard.individualFirstNameLatin}{' '}
                 {latestCard.individuNomLatin || latestCard.individualLastNameLatin}
               </dd>
             </div>
@@ -136,7 +138,7 @@ export default function HomePage() {
           <QuickLink to="/subjects" label="Subjects" description="Registered modules" />
           <QuickLink to="/exam-grades" label="Exam Grades" description="Final exam marks" />
           <QuickLink to="/cc-grades" label="CC Grades" description="Continuous assessment" />
-          {/* <QuickLink to="/profile" label="Profile" description="Account & details" /> */}
+          {/* Additional quick links can be added here */}
         </div>
       </div>
     </div>

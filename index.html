@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Progres FMI tiaret</title>
   </head>
+  <!--
+    The body sets up global styling for light and dark modes.  Tailwind
+    classes apply a minimal background and text colour; the root
+    React component is mounted into the `#root` element below.
+  -->
   <body class="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
     <div id="root"></div>
+    <!-- The Vite dev server and production build both look for src/main.jsx -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

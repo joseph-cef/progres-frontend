@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+// The main application shell for authenticated pages.  It includes
+// a responsive sidebar with navigation links and a header.  On
+// smaller screens the sidebar can be toggled via the hamburger
+// button.  The layout uses Tailwind utility classes extensively to
+// achieve an accessible, responsive design.
 export default function DashboardLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -40,7 +45,7 @@ export default function DashboardLayout() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 text-gray-800 dark:from-gray-950 dark:via-slate-950 dark:to-slate-900 dark:text-gray-100">
-      {/* موبيل overlay */}
+      {/* Mobile overlay */}
       {menuOpen && (
         <div
           className="fixed inset-0 z-20 bg-black/40 md:hidden"
@@ -159,7 +164,6 @@ export default function DashboardLayout() {
             <div className="flex flex-1 items-center justify-center gap-2 text-center">
               <span className="text-sm font-semibold">Progres</span>
             </div>
-
           </header>
 
           {/* Desktop header */}
@@ -172,7 +176,6 @@ export default function DashboardLayout() {
                 Student Area
               </p>
             </div>
-
           </header>
 
           {/* Main scrollable content */}

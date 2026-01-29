@@ -3,6 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards, getExamGrades } from '../services/api';
 
+/**
+ * Presents the student's exam grades for the latest enrolment.  A
+ * table lists each subject with its corresponding exam note and
+ * coefficient.  Loading, error and empty states are handled.
+ */
 export default function ExamGradesPage() {
   const { user } = useAuth();
   const {
@@ -24,7 +29,7 @@ export default function ExamGradesPage() {
 
   return (
     <div className="space-y-4">
-      {/* عنوان الصفحة مع ستايل أجمل */}
+      {/* Page header */}
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">
@@ -41,7 +46,7 @@ export default function ExamGradesPage() {
         )}
       </div>
 
-      {/* كارد رئيسي لعرض الجدول */}
+      {/* Data container */}
       <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900 sm:p-6">
         {isLoading && (
           <div className="space-y-2">
@@ -91,7 +96,7 @@ export default function ExamGradesPage() {
                         {item.mcLibelleFr}
                       </td>
 
-                      {/* Note — كلها خضراء */}
+                      {/* Note — green pill if present */}
                       <td className="px-4 py-3">
                         <span className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300">
                           {item.noteExamen ?? '–'}

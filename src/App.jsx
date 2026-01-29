@@ -19,6 +19,10 @@ import TransportPage from './pages/TransportPage';
 import DischargePage from './pages/DischargePage';
 import ProfilePage from './pages/ProfilePage';
 
+// Root component defines the application routes.  Public routes such as
+// the login page are defined outside of the authentication guard.
+// Protected routes are wrapped in RequireAuth and DashboardLayout to
+// enforce authentication and provide a consistent UI shell.
 export default function App() {
   return (
     <Routes>

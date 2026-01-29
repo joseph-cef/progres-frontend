@@ -1,11 +1,15 @@
 import axios from 'axios';
 
+// Base URL for the API.  In production this is set via
+// VITE_API_BASE_URL in the environment, falling back to '/api' so that
+// local development uses the Vite proxy defined in vite.config.js.
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
+// Normalize error responses to return a single message string.
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -18,12 +22,10 @@ function authHeader(token) {
   return token ? { Authorization: token } : {};
 }
 
-
 export async function login(username, password) {
   const { data } = await api.post('/authentication/v1/', { username, password });
   return data;
 }
-
 
 export async function getStudentCards(uuid, token) {
   const { data } = await api.get(`/infos/bac/${uuid}/dias`, {
@@ -32,14 +34,12 @@ export async function getStudentCards(uuid, token) {
   return data;
 }
 
-
 export async function getTransportState(uuid, cardId, token) {
   const { data } = await api.get(`/infos/demandeTransport/${uuid}/${cardId}`, {
     headers: authHeader(token),
   });
   return data;
 }
-
 
 export async function getAccommodation(uuid, token) {
   const { data } = await api.get(`/infos/bac/${uuid}/demandesHebregement`, {
@@ -63,7 +63,6 @@ export async function getExamGrades(cardId, token) {
   return data;
 }
 
-
 export async function getExamSchedule(offerId, levelId, token) {
   const { data } = await api.get(
     `/infos/Examens/${offerId}/niveau/${levelId}/examens`,
@@ -72,14 +71,12 @@ export async function getExamSchedule(offerId, levelId, token) {
   return data;
 }
 
-
 export async function getGroups(cardId, token) {
   const { data } = await api.get(`/infos/dia/${cardId}/groups`, {
     headers: authHeader(token),
   });
   return data;
 }
-
 
 export async function getSubjects(offerId, levelId, token) {
   const { data } = await api.get(
@@ -89,7 +86,6 @@ export async function getSubjects(offerId, levelId, token) {
   return data;
 }
 
-
 export async function getSubjectSchedule(cardId, token) {
   const { data } = await api.get(
     `/infos/seanceEmploi/inscription/${cardId}`,
@@ -98,14 +94,12 @@ export async function getSubjectSchedule(cardId, token) {
   return data;
 }
 
-
 export async function getBacInfo(uuid, token) {
   const { data } = await api.get(`/infos/bac/${uuid}`, {
     headers: authHeader(token),
   });
   return data;
 }
-
 
 export async function getBacGrades(uuid, token) {
   const { data } = await api.get(`/infos/bac/${uuid}/notes`, {
@@ -114,7 +108,6 @@ export async function getBacGrades(uuid, token) {
   return data;
 }
 
-
 export async function getAcademicTranscripts(uuid, cardId, token) {
   const { data } = await api.get(
     `/infos/bac/${uuid}/dias/${cardId}/periode/bilans`,
@@ -122,7 +115,6 @@ export async function getAcademicTranscripts(uuid, cardId, token) {
   );
   return data;
 }
-
 
 export async function getAcademicDecision(uuid, cardId, token) {
   const { data } = await api.get(
@@ -154,7 +146,6 @@ export async function getAcademicPeriods(yearId, token) {
   return data;
 }
 
-
 export async function getDischarge(uuid, token) {
   const { data } = await api.get(`/${uuid}/qitus`, {
     headers: authHeader(token),
@@ -168,7 +159,6 @@ export async function getDebts(uuid, token) {
   });
   return data;
 }
-
 
 export async function getStudentPhoto(uuid, token) {
   const { data } = await api.get(`/infos/image/${uuid}`, {
