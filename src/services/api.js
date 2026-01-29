@@ -1,13 +1,7 @@
 import axios from 'axios';
-
-// =========================
-// API BASE URL CONFIG
-// =========================
-
- const DEFAULT_API_BASE_URL = 'https://progres.mesrs.dz';
-
-// نأخذ من متغيّر البيئة إن وُجد، وإلا نستعمل القيمة الافتراضية.
-// نزيل أي / زيادة في نهاية الرابط لنتجنب // في المسارات.
+ 
+ const DEFAULT_API_BASE_URL = 'https://progres.univ-dz.dz';
+ 
 const API_BASE_URL = (
   import.meta.env.VITE_API_BASE_URL ||
   DEFAULT_API_BASE_URL
@@ -16,13 +10,7 @@ const API_BASE_URL = (
 const api = axios.create({
   baseURL: API_BASE_URL,
 });
-
-// =========================
-// GLOBAL ERROR HANDLING
-// =========================
-
-// Normalize error responses to return a single message string.
-api.interceptors.response.use(
+ api.interceptors.response.use(
   (response) => response,
   (error) => {
     const message =
@@ -37,13 +25,9 @@ function authHeader(token) {
   return token ? { Authorization: token } : {};
 }
 
-// =========================
-// API METHODS
-// =========================
-
+ 
 export async function login(username, password) {
-  // baseURL + /authentication/v1/
-  // مثال: https://progres.univ-dz.dz/api/authentication/v1/
+ 
   const { data } = await api.post('/authentication/v1/', { username, password });
   return data;
 }
