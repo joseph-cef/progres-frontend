@@ -272,55 +272,11 @@ export default function TranscriptsPage() {
             })}
           </div>
 
-           {activeYear && (
-            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-              <div className="space-y-0.5">
-                <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">
-                  {activeYearDisplayIndex
-                    ? `Year ${activeYearDisplayIndex}`
-                    : 'Year'}
-                </p>
-                {activeYear.yearLabel && (
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Academic year:{' '}
-                    <span className="font-medium text-gray-800 dark:text-gray-100">
-                      {activeYear.yearLabel}
-                    </span>
-                  </p>
-                )}
-                {activeYear.decision?.typeDecisionLibelleFr && (
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Decision:{' '}
-                    <span className="font-medium text-gray-800 dark:text-gray-100">
-                      {activeYear.decision.typeDecisionLibelleFr}
-                    </span>
-                  </p>
-                )}
-              </div>
-
-              {activeYear.decision?.moyenne !== null &&
-                activeYear.decision?.moyenne !== undefined && (
-                  <span
-                    className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold
-                      ${
-                        activeYear.decision.moyenne < 10
-                          ? 'bg-red-50 text-red-600 dark:bg-red-900/40 dark:text-red-300'
-                          : 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300'
-                      }`}
-                  >
-                    Year Average: {activeYear.decision.moyenne}
-                  </span>
-                )}
-            </div>
-          )}
-
            {activeTranscript && (
             <div className="space-y-2">
               <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-0.5">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">
-                    {activeTranscript.periodeLibelleFr}
-                  </p>
+
                   {activeTranscript.niveauLibelleLongLt && (
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       {activeTranscript.niveauLibelleLongLt}
