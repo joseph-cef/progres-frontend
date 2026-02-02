@@ -236,7 +236,7 @@ export default function ExamGradesPage() {
               <div className="space-y-5">
                 {regularGrades.length > 0 && (
                   <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700">
-                    <div className="max-h-[60vh] overflow-x-auto">
+                    <div className="overflow-x-auto">
                       <table className="min-w-full divide-y divide-gray-200 text-xs dark:divide-gray-700 sm:text-sm">
                         <thead className="bg-gray-50 dark:bg-gray-800/80">
                           <tr>
@@ -298,7 +298,7 @@ export default function ExamGradesPage() {
                       Rattrapage
                     </h3>
                     <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700">
-                      <div className="max-h-[60vh] overflow-x-auto">
+                      <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-gray-200 text-xs dark:divide-gray-700 sm:text-sm">
                           <thead className="bg-gray-50 dark:bg-gray-800/80">
                             <tr>
