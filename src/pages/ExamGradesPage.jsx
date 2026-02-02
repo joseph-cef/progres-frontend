@@ -93,11 +93,22 @@ export default function ExamGradesPage() {
                       </td>
 
                       {/* Note — green pill if present */}
-                      <td className="px-4 py-3">
-                        <span className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300">
-                          {item.noteExamen ?? '–'}
-                        </span>
-                      </td>
+<td className="px-4 py-3">
+  {item.noteExamen !== null && item.noteExamen !== undefined ? (
+    <span
+      className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold
+        ${
+          item.noteExamen < 10
+            ? 'bg-red-50 text-red-600 dark:bg-red-900/40 dark:text-red-300'
+            : 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-300'
+        }`}
+    >
+      {item.noteExamen}
+    </span>
+  ) : (
+    <span className="text-gray-400">–</span>
+  )}
+</td>
 
                       {/* Coefficient */}
                       <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
