@@ -3,12 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards, getSubjectSchedule } from '../services/api';
 
-/**
- * Shows the weekly timetable for the student's latest enrolment.  A
- * schedule entry includes the day of week, the start and end times,
- * subject name, group, teacher and location.  Entries are sorted by
- * day and start time for convenience.
- */
+ 
 export default function SchedulePage() {
   const { user } = useAuth();
   const { data, error, isLoading } = useQuery(
@@ -22,8 +17,7 @@ export default function SchedulePage() {
     { enabled: !!user }
   );
 
-  // Sort entries by day and then by start time if available.
-  const sorted = Array.isArray(data)
+   const sorted = Array.isArray(data)
     ? [...data].sort((a, b) => {
         const dayA = a.jourId ?? 0;
         const dayB = b.jourId ?? 0;

@@ -4,11 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards } from '../services/api';
 
-/**
- * Dashboard home page.  Shows a welcome greeting with the
- * student's name if available, a highlight of their latest
- * enrollment details, and quick links to commonly used pages.
- */
+ 
 export default function HomePage() {
   const { user } = useAuth();
 
@@ -127,8 +123,7 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Quick links */}
-      <div>
+       <div>
         <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
           Quick Access
         </h3>
@@ -138,8 +133,7 @@ export default function HomePage() {
           <QuickLink to="/subjects" label="Subjects" description="Registered modules" />
           <QuickLink to="/exam-grades" label="Exam Grades" description="Final exam marks" />
           <QuickLink to="/cc-grades" label="CC Grades" description="Continuous assessment" />
-          {/* Additional quick links can be added here */}
-        </div>
+         </div>
       </div>
     </div>
   );

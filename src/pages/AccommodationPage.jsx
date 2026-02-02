@@ -2,12 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getAccommodation } from '../services/api';
-
-/**
- * Displays the student's accommodation requests and assignments.  A simple
- * list shows the residence, dormitory and optional affectation for each
- * entry.  If there are no entries the page indicates this.
- */
+ 
 export default function AccommodationPage() {
   const { user } = useAuth();
   const {

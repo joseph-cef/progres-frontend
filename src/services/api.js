@@ -1,16 +1,13 @@
 import axios from 'axios';
 
-// Base URL for the API.  In production this is set via
-// VITE_API_BASE_URL in the environment, falling back to '/api' so that
-// local development uses the Vite proxy defined in vite.config.js.
+ 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
-// Normalize error responses to return a single message string.
-api.interceptors.response.use(
+ api.interceptors.response.use(
   (response) => response,
   (error) => {
     const message = error?.response?.data?.message || error.message || 'Unknown error';

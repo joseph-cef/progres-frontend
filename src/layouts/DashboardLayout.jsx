@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-// The main application shell for authenticated pages.  It includes
-// a responsive sidebar with navigation links and a header.  On
-// smaller screens the sidebar can be toggled via the hamburger
-// button.  The layout uses Tailwind utility classes extensively to
-// achieve an accessible, responsive design.
+ 
 export default function DashboardLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();

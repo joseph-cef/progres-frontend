@@ -7,13 +7,7 @@ import {
   getAcademicPeriods,
   getExamSchedule,
 } from '../services/api';
-
-/**
- * Displays the exam schedule for the student's latest enrolment.  The
- * schedule is compiled by iterating through each academic period in
- * the current year and collecting the exam sessions for the
- * student's level.  The resulting entries are sorted chronologically.
- */
+ 
 export default function ExamSchedulePage() {
   const { user } = useAuth();
   const { data, error, isLoading } = useQuery(
@@ -22,18 +16,14 @@ export default function ExamSchedulePage() {
       const cards = await getStudentCards(user.uuid, user.token);
       if (!cards.length) return [];
       const latest = [...cards].sort((a, b) => b.id - a.id)[0];
-      // levelId is required for exam schedule endpoint
-      const levelId = latest.niveauId || latest.levelId;
-      // Fetch current academic year and its periods
-      const year = await getCurrentAcademicYear(user.token);
+       const levelId = latest.niveauId || latest.levelId;
+       const year = await getCurrentAcademicYear(user.token);
       const periods = await getAcademicPeriods(year.id, user.token);
       const schedulesPerPeriod = await Promise.all(
         periods.map((p) => getExamSchedule(p.id, levelId, user.token))
       );
-      // Flatten and annotate with period label
-      const annotated = schedulesPerPeriod.flat().map((s) => ({ ...s }));
-      // Sort by date then time
-      annotated.sort((a, b) => {
+       const annotated = schedulesPerPeriod.flat().map((s) => ({ ...s }));
+       annotated.sort((a, b) => {
         const dateA = `${a.dateExamen} ${a.heureDebut || ''}`;
         const dateB = `${b.dateExamen} ${b.heureDebut || ''}`;
         return dateA.localeCompare(dateB);

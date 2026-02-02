@@ -7,14 +7,7 @@ import {
   getAcademicDecision,
 } from '../services/api';
 
-/**
- * Shows the student's academic transcripts.  Each transcript corresponds
- * to a period within an academic year.  The period name and overall
- * average are displayed in a list; clicking on a transcript reveals
- * the underlying units (UEs) and their constituent subjects with
- * grades and coefficients.  The academic decision for the year is
- * fetched once and displayed at the top of the page.
- */
+ 
 export default function TranscriptsPage() {
   const { user } = useAuth();
   const [expanded, setExpanded] = useState(null);

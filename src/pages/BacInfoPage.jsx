@@ -2,11 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getBacInfo, getBacGrades, getStudentPhoto } from '../services/api';
-
-/**
- * Shows baccalaureate information along with subject grades and the
- * student's photo.  Handles loading, error, and empty states.
- */
+ 
 export default function BacInfoPage() {
   const { user } = useAuth();
   const {
@@ -50,9 +46,7 @@ export default function BacInfoPage() {
         <div className="p-4 bg-white dark:bg-gray-800 rounded shadow space-y-2">
           <div className="flex items-center space-x-4">
             {photoData && (
-              // The backend returns a base64 encoded JPEG.  Wrap it in a
-              // data URI so it can be displayed directly in the browser.
-              <img
+                <img
                 src={`data:image/jpeg;base64,${photoData}`}
                 alt="Student photo"
                 className="w-16 h-16 rounded-full object-cover"

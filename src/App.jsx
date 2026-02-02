@@ -19,15 +19,11 @@ import TransportPage from './pages/TransportPage';
 import DischargePage from './pages/DischargePage';
 import ProfilePage from './pages/ProfilePage';
 
-// Root component defines the application routes.  Public routes such as
-// the login page are defined outside of the authentication guard.
-// Protected routes are wrapped in RequireAuth and DashboardLayout to
-// enforce authentication and provide a consistent UI shell.
+ 
 export default function App() {
   return (
     <Routes>
-      {/* Public route */}
-      <Route
+       <Route
         path="/login"
         element={
           <AuthLayout>
@@ -35,8 +31,7 @@ export default function App() {
           </AuthLayout>
         }
       />
-      {/* Protected routes */}
-      <Route element={<RequireAuth />}> {/* apply auth guard to nested routes */}
+       <Route element={<RequireAuth />}>  
         <Route element={<DashboardLayout />}>
           <Route index element={<HomePage />} />
           <Route path="cards" element={<CardsPage />} />
@@ -54,8 +49,7 @@ export default function App() {
           <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>
-      {/* Fallback: redirect unknown routes to home */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

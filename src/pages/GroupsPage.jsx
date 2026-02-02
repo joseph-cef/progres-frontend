@@ -3,12 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards, getGroups } from '../services/api';
 
-/**
- * Shows the student's pedagogical groups for their most recent
- * enrolment.  It fetches the latest card first then uses its ID to
- * retrieve group information.  Displays loading, error and empty
- * states gracefully.
- */
+ 
 export default function GroupsPage() {
   const { user } = useAuth();
 
@@ -25,8 +20,7 @@ export default function GroupsPage() {
         return { groups: [], card: null };
       }
 
-      // pick the latest card (highest id)
-      const latestCard = [...cards].sort((a, b) => b.id - a.id)[0];
+       const latestCard = [...cards].sort((a, b) => b.id - a.id)[0];
 
       const groups = await getGroups(latestCard.id, user.token);
 

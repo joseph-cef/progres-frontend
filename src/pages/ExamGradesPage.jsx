@@ -3,11 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards, getExamGrades } from '../services/api';
 
-/**
- * Presents the student's exam grades for the latest enrolment.  A
- * table lists each subject with its corresponding exam note and
- * coefficient.  Loading, error and empty states are handled.
- */
+ 
 export default function ExamGradesPage() {
   const { user } = useAuth();
   const {

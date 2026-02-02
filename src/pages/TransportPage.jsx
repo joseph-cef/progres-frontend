@@ -3,12 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards, getTransportState } from '../services/api';
 
-/**
- * Displays the student's transport payment status.  A simple boolean
- * indicator informs whether the student has paid for university
- * transportation for the current academic year.  If no data is found
- * the backend returns null and the page reflects that.
- */
+ 
 export default function TransportPage() {
   const { user } = useAuth();
   const { data, error, isLoading } = useQuery(

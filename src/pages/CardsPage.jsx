@@ -3,11 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards } from '../services/api';
 
-/**
- * Displays the student's latest enrollment card with a
- * beautifully styled summary of registration details, and basic
- * personal information.  Handles loading, error and empty states.
- */
+ 
 export default function CardsPage() {
   const { user } = useAuth();
 

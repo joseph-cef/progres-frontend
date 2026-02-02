@@ -3,16 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getIndividualInfo, getStudentPhoto, getEstablishmentLogo, getStudentCards } from '../services/api';
 
-/**
- * Displays personal details about the student along with their latest
- * registration number.  Fetches the individual's info, an optional
- * photo, the establishment logo, and the latest card for the
- * registration number.  Handles loading and error states.
- */
+ 
 export default function ProfilePage() {
   const { user } = useAuth();
-  // Individual info
-  const {
+   const {
     data: info,
     error: infoError,
     isLoading: infoLoading,
@@ -21,14 +15,12 @@ export default function ProfilePage() {
     () => getIndividualInfo(user.uuid, user.token),
     { enabled: !!user }
   );
-  // Student photo
-  const { data: photoData } = useQuery(
+   const { data: photoData } = useQuery(
     ['studentPhoto', user?.uuid],
     () => getStudentPhoto(user.uuid, user.token),
     { enabled: !!user }
   );
-  // Establishment logo (only fetched if establishment ID is present)
-  const { data: logoData } = useQuery(
+   const { data: logoData } = useQuery(
     ['establishmentLogo', user?.establishmentId],
     () => getEstablishmentLogo(user.establishmentId, user.token),
     { enabled: !!user && !!user.establishmentId }

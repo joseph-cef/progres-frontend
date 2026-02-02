@@ -3,12 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { getStudentCards, getSubjects } from '../services/api';
 
-/**
- * Lists the subjects along with their continuous control and exam
- * coefficients for the latest enrolment.  The backend associates
- * subjects with an opening training offer and a level ID; these
- * values are obtained from the most recent student card.
- */
+ 
 export default function SubjectsPage() {
   const { user } = useAuth();
 
