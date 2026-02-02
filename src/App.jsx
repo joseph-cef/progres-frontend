@@ -18,6 +18,7 @@ import AccommodationPage from './pages/AccommodationPage';
 import TransportPage from './pages/TransportPage';
 import DischargePage from './pages/DischargePage';
 import ProfilePage from './pages/ProfilePage';
+import AboutPage from './pages/AboutPage';
 
  
 export default function App() {
@@ -47,6 +48,8 @@ export default function App() {
           <Route path="transport" element={<TransportPage />} />
           <Route path="discharge" element={<DischargePage />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="/about" element={<AboutPage />} />
+
         </Route>
       </Route>
        <Route path="*" element={<Navigate to="/" replace />} />
