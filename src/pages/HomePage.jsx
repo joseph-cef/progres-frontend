@@ -133,6 +133,7 @@ export default function HomePage() {
           <QuickLink to="/subjects" label="Subjects" description="Registered modules" />
           <QuickLink to="/exam-grades" label="Exam Grades" description="Final exam marks" />
           <QuickLink to="/cc-grades" label="CC Grades" description="Continuous assessment" />
+          <QuickLink to="/transcripts" label="Transcripts" description="Academic records" />
          </div>
       </div>
     </div>

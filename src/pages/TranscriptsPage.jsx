@@ -85,7 +85,7 @@ export default function TranscriptsPage() {
 
   const hasData = Array.isArray(yearsData) && yearsData.length > 0;
 
-  const years = useMemo(() => {
+   const years = useMemo(() => {
     if (!hasData) return [];
     const arr = [...yearsData];
     arr.sort((a, b) => a.academicYearStart - b.academicYearStart);
@@ -93,11 +93,18 @@ export default function TranscriptsPage() {
   }, [yearsData, hasData]);
 
   const activeYear = useMemo(
-    () => (hasData && activeYearKey
-      ? yearsData.find((y) => y.cardId === activeYearKey) || null
-      : null),
+    () =>
+      hasData && activeYearKey
+        ? yearsData.find((y) => y.cardId === activeYearKey) || null
+        : null,
     [yearsData, hasData, activeYearKey]
   );
+
+   const activeYearDisplayIndex = useMemo(() => {
+    if (!activeYear) return null;
+    const idx = years.findIndex((y) => y.cardId === activeYear.cardId);
+    return idx === -1 ? null : idx + 1;
+  }, [activeYear, years]);
 
   const semesters = useMemo(() => {
     if (!activeYear) return [];
@@ -121,9 +128,10 @@ export default function TranscriptsPage() {
   }, [activeYear]);
 
   const activeSemesterInfo = useMemo(
-    () => (semesters.length && activeSemesterKey
-      ? semesters.find((s) => s.key === activeSemesterKey) || null
-      : null),
+    () =>
+      semesters.length && activeSemesterKey
+        ? semesters.find((s) => s.key === activeSemesterKey) || null
+        : null,
     [semesters, activeSemesterKey]
   );
 
@@ -159,7 +167,7 @@ export default function TranscriptsPage() {
   useEffect(() => {
     if (!hasData || !yearsData.length) return;
 
-    if (!activeYearKey) {
+     if (!activeYearKey) {
       const lastYear = years[years.length - 1];
       if (lastYear) {
         setActiveYearKey(lastYear.cardId);
@@ -167,7 +175,7 @@ export default function TranscriptsPage() {
       }
     }
 
-    if (activeYearKey && !activeSemesterKey) {
+     if (activeYearKey && !activeSemesterKey) {
       const year = yearsData.find((y) => y.cardId === activeYearKey);
       if (year && year.transcripts && year.transcripts.length) {
         const sorted = [...year.transcripts].sort(
@@ -219,10 +227,11 @@ export default function TranscriptsPage() {
       )}
 
       {!isLoading && hasData && (
-        <div className="rounded-2xl border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-900 sm:p-4 md:p-6 space-y-4">
-          <div className="-mx-3 flex gap-2 overflow-x-auto pb-1 sm:mx-0">
-            {years.map((y) => {
+        <div className="space-y-4 rounded-2xl border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-900 sm:p-4 md:p-6">
+           <div className="-mx-3 flex gap-2 overflow-x-auto pb-1 sm:mx-0">
+            {years.map((y, idx) => {
               const active = y.cardId === activeYearKey;
+              const label = `Year ${idx + 1}`;
               return (
                 <button
                   key={y.cardId}
@@ -237,13 +246,13 @@ export default function TranscriptsPage() {
                         : 'border-gray-300 bg-white text-gray-700 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200'
                     }`}
                 >
-                  {y.yearLabel}
+                  {label}
                 </button>
               );
             })}
           </div>
 
-          <div className="-mx-3 flex gap-2 overflow-x-auto pb-1 sm:mx-0">
+           <div className="-mx-3 flex gap-2 overflow-x-auto pb-1 sm:mx-0">
             {semesters.map((s) => {
               const active = s.key === activeSemesterKey;
               return (
@@ -263,12 +272,22 @@ export default function TranscriptsPage() {
             })}
           </div>
 
-          {activeYear && (
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <div className="space-y-1">
+           {activeYear && (
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+              <div className="space-y-0.5">
                 <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">
-                  {activeYear.yearLabel}
+                  {activeYearDisplayIndex
+                    ? `Year ${activeYearDisplayIndex}`
+                    : 'Year'}
                 </p>
+                {activeYear.yearLabel && (
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    Academic year:{' '}
+                    <span className="font-medium text-gray-800 dark:text-gray-100">
+                      {activeYear.yearLabel}
+                    </span>
+                  </p>
+                )}
                 {activeYear.decision?.typeDecisionLibelleFr && (
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     Decision:{' '}
@@ -278,6 +297,7 @@ export default function TranscriptsPage() {
                   </p>
                 )}
               </div>
+
               {activeYear.decision?.moyenne !== null &&
                 activeYear.decision?.moyenne !== undefined && (
                   <span
@@ -294,7 +314,7 @@ export default function TranscriptsPage() {
             </div>
           )}
 
-          {activeTranscript && (
+           {activeTranscript && (
             <div className="space-y-2">
               <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-0.5">
@@ -322,7 +342,7 @@ export default function TranscriptsPage() {
                   )}
               </div>
 
-              {rows.length === 0 ? (
+               {rows.length === 0 ? (
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   No detailed marks for this semester.
                 </p>

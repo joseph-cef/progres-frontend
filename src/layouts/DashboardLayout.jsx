@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
- 
 export default function DashboardLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -19,6 +18,7 @@ export default function DashboardLayout() {
     // { to: '/exam-schedule', label: 'Exam Schedule', icon: '⏰' },
     { to: '/cc-grades', label: 'CC Grades', icon: '📊' },
     { to: '/transcripts', label: 'Transcripts', icon: '📄' },
+    { to: '/about', label: 'About', icon: 'ℹ️' }, // ✅ الرابط الجديد
     // { to: '/accommodation', label: 'Accommodation', icon: '🏡' },
     // { to: '/transport', label: 'Transport', icon: '🚌' },
     // { to: '/discharge', label: 'Discharge', icon: '✅' },
