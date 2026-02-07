@@ -19,6 +19,7 @@ import TransportPage from './pages/TransportPage';
 import DischargePage from './pages/DischargePage';
 import ProfilePage from './pages/ProfilePage';
 import AboutPage from './pages/AboutPage';
+import AverageCalculatorPage from './pages/AverageCalculatorPage';
 
  
 export default function App() {
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="exam-grades" element={<ExamGradesPage />} />
           <Route path="exam-schedule" element={<ExamSchedulePage />} />
           <Route path="cc-grades" element={<CCGradesPage />} />
+          <Route path="average-calculator" element={<AverageCalculatorPage />} />
           <Route path="transcripts" element={<TranscriptsPage />} />
           <Route path="accommodation" element={<AccommodationPage />} />
           <Route path="transport" element={<TransportPage />} />

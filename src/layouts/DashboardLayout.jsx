@@ -22,6 +22,7 @@ export default function DashboardLayout() {
     { to: '/schedule', label: 'Schedule', icon: '🗓️' },
     { to: '/exam-grades', label: 'Exam Grades', icon: '🧪' },
     { to: '/cc-grades', label: 'CC Grades', icon: '📊' },
+    { to: '/average-calculator', label: 'Average Calculator', icon: '🧮' },
     { to: '/transcripts', label: 'Transcripts', icon: '📄' },
     { to: '/about', label: 'About', icon: 'ℹ️' },
   ];
